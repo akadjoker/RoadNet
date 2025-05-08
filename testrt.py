@@ -62,6 +62,7 @@ while True:
     img_rgb = cv2.cvtColor(frame_resized, cv2.COLOR_BGR2RGB)
     img_norm = img_rgb.astype(np.float32) / 255.0
     input_tensor = img_norm.transpose(2, 0, 1).reshape(1, 3, IMG_SIZE, IMG_SIZE).astype(np.float32)
+    input_tensor = np.ascontiguousarray(input_tensor)
 
     # ----- Copiar para GPU -----
     cuda.memcpy_htod(d_input, input_tensor)
